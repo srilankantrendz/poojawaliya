@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test2 - Json API : Basic</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script>
+
+    $(function() {
+
+   var people = [];
+
+   $.getJSON('http://www.omdbapi.com/?t=moana&y=2016&plot=short&r=json', function(data) {
+  
+          var tblRow = "<tr>" + "<td>" + data.Title + "</td>" +
+           "<td>" + data.Year + "</td>" + "<td>" + data.Country + "</td>" + "<td>" + data.imdbID + "</td>"+ "<td>" + data.imdbRating + "</td>"  + "</tr>"
+           $(tblRow).appendTo("#userdata tbody");
+   });
+
+});
+
+
+</script>
+<script>
+$(document).ready(function(){
+
+    $("#button1").click(function(){
+		
+		var name = $('#name').val();
+		var link = 'http://www.omdbapi.com/?t='+name+'&y=2016&plot=short&r=json';
+		
+		
+		   $.getJSON(link, function(data) {
+  
+          var tblRow = "<tr>" + "<td>" + data.Title + "</td>" +
+           "<td>" + data.Year + "</td>" + "<td>" + data.Country + "</td>" + "<td>" + data.imdbID + "</td>"+ "<td>" + data.imdbRating + "</td>"  + "</tr>"
+           $(tblRow).appendTo("#userdata tbody");
+		   		   $("#my_image").attr("src",data.Poster);
+   });
+		
+    });
+	
+});
+</script>
+
+</head>
+<body>
+<style>
+.my-textfield {
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    outline: none;
+    cursor: text;
+}
+</style>
+
+<div id="movie">Movie Info
+</div>
+<div>
+<input type="text" id="name" class="my-textfield ">
+<button id="button1" class="ui-button ui-widget ui-corner-all"> Search</button>
+</div>
+
+
+<div class="wrapper">
+<div class="profile">
+   <table id= "userdata" border="1">
+  <thead>
+            <th width="300px">Title</th>
+            <th width="200px">Year</th>
+            <th width="200px">Country</th>
+            <th width="200px">imdbID</th>
+			<th>imdbRating</th>
+        </thead>
+      <tbody>
+
+       </tbody>
+   </table>
+	<img id="my_image"></img>
+</div>
+</div>
+
+</body>
+</html>
